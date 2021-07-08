@@ -1,13 +1,11 @@
 import React from 'react';
-import Hearders from './components/Headers'
-import FormCharacter from './components/FormCharacter'
+import Hearders from './components/Header'
 
 
 function App() {
   return (
     <div >
       <Hearders />
-      <FormCharacter />
     </div>
   );
 }
