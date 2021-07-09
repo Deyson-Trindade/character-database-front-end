@@ -7,10 +7,10 @@ const Home = () => {
     
 
     return (
-        <body>
+        <div>
             <img src={Img1} style={{ position: 'relative', backgroundSize: 'cover', width: '100%', backgroundPosition: 'center'}} alt="imagem de fundo" />
 
-        </body>
+        </div>
     )
 }
 

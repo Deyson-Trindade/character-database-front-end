@@ -49,14 +49,13 @@ const Lista = () => {
                         {personagem.raca} -
                         {personagem.genero} -
                         {personagem.classe}">
-                        <td>{personagem.ID}</td>
                         <td>{personagem.nome}</td>
                         <td>{personagem.genero}</td>
                         <td>{personagem.classe}</td>
                         <td>{personagem.raca}</td>
                         <td >
-                            <Button type="submit" variant="contained" color="primary" size="medium">Alterar</Button>
-                            <Button type="submit" variant="contained" color="primary" size="medium" onClick={() => deletar(personagem.ID)}>Deletar</Button>
+                            <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark">Alterar</Button>
+                            <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark" onClick={() => deletar(personagem.ID)}>Deletar</Button>
                         </td>
                     </tr>)}
                 </tbody>

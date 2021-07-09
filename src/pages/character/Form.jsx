@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 
@@ -6,6 +7,10 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 
 const FormCharacter = () => {
+
+  let history = useHistory()
+
+
   const [generos, setGeneros] = useState([])
   const [racas, setRacas] = useState([])
   const [classes, setClasses] = useState([])
@@ -35,6 +40,12 @@ const FormCharacter = () => {
   function postData() {
 
     try {
+      console.log({
+        nome,
+        race,
+        gender,
+        classe
+      })
       fetch('http://localhost:3003/dominios', {
         method: 'POST',
         headers: {
@@ -54,6 +65,7 @@ const FormCharacter = () => {
 
     }
   }
+
 
 
   return (
@@ -81,13 +93,28 @@ const FormCharacter = () => {
         </div>
         <div class="col-md-4">
           <select
+            style={{ margin: '20px' }}
+            class="form-select"
+            value={race}
+            onChange={e => {
+              console.log(e.target.value)
+              setRace(e.target.value)
+            }
+            } >
+            {
+              racas
+            }
+          </select>
+          <select
             style={{ marginLeft: '20px' }}
             class="form-select"
-            aria-label="Default select example"
             value={gender}
-            onChange={e => setGender(e.target.value)}
+            placeholder="Gênero do personagem"
+            onChange={e => {
+              console.log(e.target.value)
+              setGender(e.target.value)
+            }}
           >
-            <option selected desabled>Escolha seu gênero</option>
             {
               generos
             }
@@ -95,21 +122,11 @@ const FormCharacter = () => {
           <select
             style={{ margin: '20px' }}
             class="form-select"
-            aria-label="Default select example"
-            value={race}
-            onChange={e => setRace(e.target.value)}>
-               <option selected desabled>Escolha sua raça</option>
-            {
-              racas
-            }
-          </select>
-          <select
-            style={{ margin: '20px' }}
-            class="form-select"
-            aria-label="Default select example"
-            value={race}
-            onChange={e => setClasse(e.target.value)}>
-               <option selected desabled>Escolha sua classe</option>
+            value={classe}
+            onChange={e => {
+              console.log(e.target.value)
+              setClasse(e.target.value)
+            }}>
             {
               classes
             }
@@ -123,7 +140,7 @@ const FormCharacter = () => {
             id="background" />
         </FormGroup>
         <FormGroup>
-          <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark">Salvar personagem</Button>
+          <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark" onClick={ () => history.push("/created")}>Salvar personagem</Button>
         </FormGroup>
       </Form>
     </div>

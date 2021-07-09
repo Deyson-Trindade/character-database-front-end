@@ -14,6 +14,7 @@ import FormCharacter from '../pages/character/Form'
 import GetList from '../pages/character/List'
 import Home from '../pages/home/Home'
 import Alterar from '../pages/character/Update'
+import Created from '../pages/character/Created'
 
 const NavBar = () => {
 
@@ -56,6 +57,9 @@ const NavBar = () => {
           </Route>
           <Route path="/">
             <Home />
+          </Route>
+          <Route path="/created">
+              <Created />
           </Route>
         </Switch>
       </Router>
