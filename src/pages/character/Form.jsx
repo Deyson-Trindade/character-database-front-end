@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 
 
 
@@ -9,6 +9,10 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 const FormCharacter = () => {
 
   let history = useHistory()
+
+  const handleHistory = () => {
+    history.push("/created")
+  }
 
 
   const [generos, setGeneros] = useState([])
@@ -23,6 +27,9 @@ const FormCharacter = () => {
       setGeneros(body.generos.map(genero => <option value={genero.chave} key={genero.chave} >{genero.descricao}</option>))
       setRacas(body.racas.map(raca => <option value={raca.chave} key={raca.chave} >{raca.descricao}</option>))
       setClasses(body.classes.map(classe => <option value={classe.chave} key={classe.chave} >{classe.descricao}</option>))
+      setRace(body.racas[0].chave)
+      setGender(body.generos[0].chave)
+      setClasse(body.classes[0].chave)
     }
 
     fetchData()
@@ -64,83 +71,105 @@ const FormCharacter = () => {
       console.log(erro)
 
     }
+    handleHistory()
   }
 
 
 
   return (
-    <div class="col-md-6">
-
-
+    <div className="container">
       <Form
         onSubmit={e => {
           e.preventDefault()
           postData()
 
         }}>
-        <div style={{ margin: '20px' }}>
-          <Label></Label>
-          <Input
-            value={nome}
-            onChange={e => setNome(e.target.value)}
-            type="text"
-            name="nome"
-            id="nome"
-            size="small"
-            margin="normal"
-            placeholder="Nome do personagem"
-            required />
-        </div>
-        <div class="col-md-4">
-          <select
-            style={{ margin: '20px' }}
-            class="form-select"
-            value={race}
-            onChange={e => {
-              console.log(e.target.value)
-              setRace(e.target.value)
-            }
-            } >
-            {
-              racas
-            }
-          </select>
-          <select
-            style={{ marginLeft: '20px' }}
-            class="form-select"
-            value={gender}
-            placeholder="Gênero do personagem"
-            onChange={e => {
-              console.log(e.target.value)
-              setGender(e.target.value)
-            }}
-          >
-            {
-              generos
-            }
-          </select>
-          <select
-            style={{ margin: '20px' }}
-            class="form-select"
-            value={classe}
-            onChange={e => {
-              console.log(e.target.value)
-              setClasse(e.target.value)
-            }}>
-            {
-              classes
-            }
-          </select>
-        </div>
-        <FormGroup style={{ marginTop: '20px', marginLeft: '20px' }}>
-          <Label for="exampleText">Background</Label>
+        <Row form>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="Nome">Nome</Label>
+              <Input
+                value={nome}
+                onChange={e => setNome(e.target.value)}
+                type="text"
+                name="Nome"
+                id="Nome"
+                bsSize="small"
+                placeholder="Nome do personagem"
+                required />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row form>
+          <Col md={6}>
+            <FormGroup>
+              <Label>Escolha a raça</Label>
+              <select
+                value={race}
+                className="form-select"
+                onChange={e => {
+                  console.log(e.target.value)
+                  setRace(e.target.value)
+                }
+                } >
+                {
+                  racas
+                }
+              </select>
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label>Escolha o gênero</Label>
+              <select
+                value={gender}
+                className="form-select"
+                placeholder="Gênero do personagem"
+                onChange={e => {
+                  console.log(e.target.value)
+                  setGender(e.target.value)
+                }}
+              >
+                {
+                  generos
+                }
+              </select>
+            </FormGroup>
+          </Col>
+        </Row>
+
+
+        <Row>
+          <Col md={6}>
+            <FormGroup>
+            <Label for="classe">Escolha a classe</Label>
+              <select
+                className="form-select"
+                id="classe"
+                value={classe}
+                onChange={e => {
+                  console.log(e.target.value)
+                  setClasse(e.target.value)
+                }}>
+                {
+                  classes
+                }
+              </select>
+            </FormGroup>
+          </Col>
+        </Row>
+        
+
+
+        <FormGroup>
+          <Label >Background</Label>
           <Input
             type="textarea"
             name="text"
             id="background" />
         </FormGroup>
         <FormGroup>
-          <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark" onClick={ () => history.push("/created")}>Salvar personagem</Button>
+          <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark" >Salvar personagem</Button>
         </FormGroup>
       </Form>
     </div>

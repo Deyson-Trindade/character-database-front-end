@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { Button } from 'reactstrap'
 
 const Created = () => {
@@ -10,11 +10,11 @@ const Created = () => {
         history.push("/cadastrar")
     }
 
-    return(
+    return (
 
-        <div>
-            <h3>Personagem salvo com sucesso!</h3>
-            <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark" onClick={handleHistory}>Salvar outro </Button>
+        <div style={{padding: '150px'}}>
+            <h3 style={{ textAlign: 'center' }}>Personagem salvo com sucesso!</h3>
+            <Button style={{ marginTop: '20px', marginLeft: '450px' }} color="dark" onClick={handleHistory}>Criar mais um </Button>
 
         </div>
 

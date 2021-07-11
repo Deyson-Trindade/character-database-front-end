@@ -1,10 +1,20 @@
 import { Button, Table } from 'reactstrap';
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 
 
 
 const Lista = () => {
     const [personagens, setPersonagem] = useState([])
+    let history = useHistory()
+
+
+    const alterarPersonagem = (id) => {
+        history.push({
+            pathname: `/alterar`,
+            state: { id }
+        })
+    }
 
     useEffect(() => {
         fetch('http://localhost:3003/dominios/personagem', {
@@ -24,14 +34,11 @@ const Lista = () => {
                 'Content-Type': 'application/json',
             }
         })
-            .then(res => res.json())
             .then(() => setPersonagem(personagens.filter(e => e.ID !== id)))
 
     }
 
-
     return (
-        <body>
             <Table>
                 <thead>
                     <tr>
@@ -43,24 +50,18 @@ const Lista = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {personagens.map((personagem) => <tr key="
-                        {personagem.nome}
-                        {personagem.nome} -
-                        {personagem.raca} -
-                        {personagem.genero} -
-                        {personagem.classe}">
+                    {personagens.map((personagem) => <tr key={JSON.stringify(personagem)} >
                         <td>{personagem.nome}</td>
                         <td>{personagem.genero}</td>
                         <td>{personagem.classe}</td>
                         <td>{personagem.raca}</td>
                         <td >
-                            <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark">Alterar</Button>
-                            <Button style={{ marginTop: '20px', marginLeft: '20px' }} color="dark" onClick={() => deletar(personagem.ID)}>Deletar</Button>
+                            <Button style={{ marginRight: '20px' }} color="dark" onClick={() => alterarPersonagem(personagem.ID)}>Alterar</Button>
+                            <Button color="dark" onClick={() => deletar(personagem.ID)}>Deletar</Button>
                         </td>
                     </tr>)}
                 </tbody>
             </Table>
-        </body>
     )
 }
 export default Lista
