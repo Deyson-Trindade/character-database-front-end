@@ -6,7 +6,8 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem
+  NavItem,
+  NavLink
 } from 'reactstrap';
 
 
@@ -25,12 +26,12 @@ const NavBar = () => {
           <Collapse isOpen={isOpen} navbar>
             <Nav >
               <NavItem>
-                <Link 
+                <NavLink><Link 
                   to="/cadastrar" 
-                  style={{ color: 'white', textDecoration: 'none' }}>Casdastrar novo</Link>
+                  style={{ color: 'white', textDecoration: 'none' }}>Casdastrar novo</Link></NavLink>
               </NavItem>
               <NavItem>
-                <Link to="/listar" style={{ color: 'white', textDecoration: 'none' }}>Listar</Link>
+                <NavLink><Link to="/listar" style={{ color: 'white', textDecoration: 'none' }}>Listar</Link></NavLink>
               </NavItem>
             </Nav>
           </Collapse>

@@ -66,9 +66,7 @@ const Update = () => {
       }).then(res => res.json()).then(res => console.log(res))
     } catch (erro) {
       console.log(erro)
-
     }
-    // handleHistory()
   }
 
 
@@ -76,6 +74,7 @@ const Update = () => {
   return (
     <div className="col-md-6">
 
+      <p style={{ marginLeft: '150px' }}>Bem vindo à página de alteração.</p>
 
       <Form
         onSubmit={e => {
